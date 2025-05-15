@@ -3,7 +3,7 @@ import torch
 from sklearn.model_selection import train_test_split
 from torch.utils.data import DataLoader
 from roisgan.dataset import SegmentationDataset
-from roisgan.models import Generator, Discriminator
+from roisgan.gan import Generator, Discriminator
 from roisgan.train import train
 from roisgan.config import CONFIG
 import argparse
