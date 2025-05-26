@@ -1,9 +1,9 @@
 # ROIsGAN: A Region Guided Generative Adversarial Framework for Murine Hippocampal Subregion Segmentation
 
 ### Overview
-This repository contains the implementation of ROIsGAN, a generative adversarial network (GAN) designed for segmenting murine hippocampal subregions from immunohistochemistry tissue images. The framework combines a U-Net-based generator with a discriminator, incorporating custom filter initialization options to enhance segmentation performance for neuroscience applications.
+This repository contains the implementation of ROIsGAN, a generative adversarial network (GAN) designed for segmenting murine hippocampal subregions from immunohistochemistry tissue images. The framework combines a U-Net-based generator with a region-guided discriminator to enhance segmentation performance for neuroscience applications.
 
-![Screenshot](graphical abstract.png)
+![Screenshot](graphical_abstract.png)
 
 ### Installation
 1. **Clone the Repository**:
