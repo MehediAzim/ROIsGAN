@@ -3,9 +3,10 @@ import torch.nn as nn
 import torch.optim as optim
 from tqdm import tqdm
 from roisgan.losses import generator_loss, discriminator_loss
-from roisgan.utils import visualize_predictions, evaluate, plot_training_curves, plot_test_metrics
+from roisgan.utils import visualize_predictions, evaluate, plot_test_metrics, gradient_penalty
+
 # Training Function
-def train(generator, discriminator, train_loader, val_loader, test_loader, epochs, device, init_type="CustomInit", plot_dir="plots"):
+def train(generator, discriminator, train_loader, val_loader, test_loader, epochs, device, init_type='', plot_dir=''):
     gen_optimizer = optim.Adam(generator.parameters(), lr=5e-4)
     disc_optimizer = optim.Adam(discriminator.parameters(), lr=1e-5)
     best_val_dice = 0.0
@@ -70,8 +71,8 @@ def train(generator, discriminator, train_loader, val_loader, test_loader, epoch
                 print("Early stopping triggered")
                 break
 
-        if epoch == 4 or epoch % 10 == 0:
-            visualize_predictions(generator, val_loader, device, init_type=init_type, plot_dir=plot_dir)
+        # if epoch == 4 or epoch % 10 == 0:
+        #     visualize_predictions(generator, val_loader, device, init_type=init_type, plot_dir=plot_dir)
 
     generator.load_state_dict(torch.load(f"{plot_dir}/apr29_best_generator_{init_type}_c1.pth"))
     test_metrics = evaluate(generator, test_loader, device)
@@ -79,6 +80,6 @@ def train(generator, discriminator, train_loader, val_loader, test_loader, epoch
           f"HD: {test_metrics[4]:.2f} ± {test_metrics[5]:.2f}, Prec: {test_metrics[6]:.4f} ± {test_metrics[7]:.4f}, "
           f"Rec: {test_metrics[8]:.4f} ± {test_metrics[9]:.4f}, ASSD: {test_metrics[10]:.2f} ± {test_metrics[11]:.2f}")
     plot_test_metrics(test_metrics, init_type=init_type, plot_dir=plot_dir)
-    visualize_predictions(generator, test_loader, device, init_type=init_type, plot_dir=plot_dir)
+    # visualize_predictions(generator, test_loader, device, init_type=init_type, plot_dir=plot_dir)
 
     return generator, test_metrics

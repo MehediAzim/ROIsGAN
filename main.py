@@ -25,7 +25,7 @@ def main():
     parser = argparse.ArgumentParser(description='Train ROIsGAN for hippocampal segmentation.')
     parser.add_argument('--image_dir', default=CONFIG['image_dir'], help='Directory with input images.')
     parser.add_argument('--mask_dir', default=CONFIG['mask_dir'], help='Directory with mask images.')
-    parser.add_argument('--use_custom_init', action='store_true', help='Use custom initialization for UNet.')
+    # parser.add_argument('--use_custom_init', action='store_true', help='Use custom initialization for UNet.')
     args = parser.parse_args()
 
     # Update config with command-line arguments
@@ -61,7 +61,7 @@ def main():
     logging.info(f"Training ...")
     generator = Generator().to(device)
     discriminator = Discriminator().to(device)
-    generator, test_metrics = train(generator, discriminator, train_loader, val_loader, test_loader, CONFIG, device, init_type)
+    generator, test_metrics = train(generator, discriminator, train_loader, val_loader, test_loader, CONFIG['epochs'], device, init_type='', plot_dir=CONFIG['plot_dir'])
 
 
     # Print Comparison Table
