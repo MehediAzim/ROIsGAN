@@ -7,10 +7,10 @@ This repository contains the implementation of ROIsGAN, a generative adversarial
 ### Dataset
 The dataset introduced in his study can be downloaded [here!](https://rutgers.box.com/v/HippocampalROISegDataset).
 
-### Installation, Training and Inference
+### Installation, Training, and Inference
 #### [1]. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/ROIsGAN.git
+   git clone https://github.com/MehediAzim/ROIsGAN.git
    cd ROIsGAN
    ```
 #### [2]. **Create a conda environment with all required packages**
