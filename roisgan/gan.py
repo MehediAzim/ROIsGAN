@@ -3,6 +3,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 
+#Generator
 class Generator(nn.Module):
     def __init__(self, in_channels=3, out_channels=1, use_custom_init=False):
         super(Generator, self).__init__()
@@ -60,8 +61,8 @@ class Generator(nn.Module):
         d1 = torch.cat([d1, e1], dim=1)
         d1 = self.dec1(d1)
         return self.sigmoid(self.out(d1))
-   
-# Discriminator (unchanged)
+
+# Discriminator 
 class Discriminator(nn.Module):
     def __init__(self, in_channels=1):
         super(Discriminator, self).__init__()

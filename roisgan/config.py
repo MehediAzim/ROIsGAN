@@ -25,7 +25,7 @@ CONFIG = {
 
 
     # Training configuration
-    'epochs': 100,             # Number of training epochs
+    'epochs': 150,             # Number of training epochs
     'learning_rate_g': 5e-4, # Learning rate for generator
     'learning_rate_d': 1e-5, # Learning rate for discriminator
     'init_type': '-',     

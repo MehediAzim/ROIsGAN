@@ -62,7 +62,7 @@ def train(generator, discriminator, train_loader, val_loader, test_loader, epoch
 
         if val_metrics_epoch[0] > best_val_dice:
             best_val_dice = val_metrics_epoch[0]
-            torch.save(generator.state_dict(), f"{plot_dir}/apr29_best_generator_{init_type}_c1.pth")
+            torch.save(generator.state_dict(), f"{plot_dir}/model_name{init_type}_dataset.pth")
             print(f"New best model saved with Val Dice: {best_val_dice:.4f}")
             epochs_no_improve = 0
         else:
@@ -74,7 +74,7 @@ def train(generator, discriminator, train_loader, val_loader, test_loader, epoch
         # if epoch == 4 or epoch % 10 == 0:
         #     visualize_predictions(generator, val_loader, device, init_type=init_type, plot_dir=plot_dir)
 
-    generator.load_state_dict(torch.load(f"{plot_dir}/apr29_best_generator_{init_type}_c1.pth"))
+    generator.load_state_dict(torch.load(f"{plot_dir}/model_name{init_type}_dataset.pth"))
     test_metrics = evaluate(generator, test_loader, device)
     print(f"Test Set ({init_type}) - Dice: {test_metrics[0]:.4f} ± {test_metrics[1]:.4f}, IoU: {test_metrics[2]:.4f} ± {test_metrics[3]:.4f}, "
           f"HD: {test_metrics[4]:.2f} ± {test_metrics[5]:.2f}, Prec: {test_metrics[6]:.4f} ± {test_metrics[7]:.4f}, "

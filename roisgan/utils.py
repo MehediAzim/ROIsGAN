@@ -6,6 +6,30 @@ import torch
 from scipy.spatial.distance import directed_hausdorff
 from medpy.metric.binary import assd
 
+def paired_dataset_length(image_dir, mask_dir):
+        image_paths_with_masks=[]
+        count = 0
+        for img_name in os.listdir(image_dir):
+            img_path = os.path.join(image_dir, img_name)
+            mask_name1 = img_name.replace('.tif', '_ch02_mask.png')
+            mask_name2 = img_name.replace('.tif', 'Mask.tif')
+            mask_name3 = img_name.replace('.tif','_mask.png')
+            mask_path1 = os.path.join(mask_dir, mask_name1)
+            mask_path2 = os.path.join(mask_dir, mask_name2)
+            mask_path3 = os.path.join(mask_dir, mask_name3)
+            if os.path.exists(mask_path1):
+                mask_path = mask_path1
+            elif os.path.exists(mask_path2):
+                mask_path = mask_path2
+            elif os.path.exists(mask_path3):
+                mask_path = mask_path3
+            else:
+                count += 1
+                continue
+            image_paths_with_masks.append(img_path)
+            
+        print(f"Count of mismatched images and masks: {count}")
+        return len(image_paths_with_masks)
 
 def iou_score(y_true, y_pred, epsilon=1e-8):
     intersection = torch.sum(y_true * y_pred, dim=(1, 2, 3))
